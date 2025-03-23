@@ -7,13 +7,16 @@ const StringCalculator = () => {
     const [error, setError] = useState("");
 
     // Function to handle string calculations
-    const add = (numbers) => {
-
-    };
-
-    const handleCalculate = () => {
+    const handleCalculate = (e) => {
+        if (!input) return 0;
+        console.log('numbers', input)
+        const numArray = input.split(",").map(Number);
+        setResult(numArray.reduce((sum, num) => sum + num, 0));
     }
-
+    const handleReset = () => {
+        setInput("");
+        setResult(null);
+    }
 
     return (
         <div className="calculator-container">
@@ -27,6 +30,9 @@ const StringCalculator = () => {
             />
             <button onClick={handleCalculate} className="calculate-btn">
                 Calculate
+            </button>
+            <button onClick={handleReset} className="calculate-btn">
+                Reset
             </button>
             {result !== null && <h2 className="result">Result: {result}</h2>}
             {error && <h2 className="error">{error}</h2>}
